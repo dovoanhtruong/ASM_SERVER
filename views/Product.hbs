@@ -38,13 +38,13 @@
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="public\images\meo.jpg" class="user-image" alt="User Image"/>
+                  <img src="https://sendidau.com/wp-content/uploads/2021/01/meme-meo.jpg" class="user-image" alt="User Image"/>
                   <span class="hidden-xs">Đỗ Võ Anh Trường</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
-                    <img src="public\images\meo.jpg" class="img-circle" alt="User Image" />
+                    <img src="https://sendidau.com/wp-content/uploads/2021/01/meme-meo.jpg" class="img-circle" alt="User Image" />
                     <p>
                      Đỗ Võ Anh Trường - Ad Mobile Shop
                       <small>Member since Nov. 2021</small>
@@ -74,7 +74,7 @@
           <!-- Sidebar user panel -->
           <div class="user-panel">
             <div class="pull-left image">
-              <img src="public\images\meo.jpg" class="img-circle" alt="User Image" />
+              <img src="https://sendidau.com/wp-content/uploads/2021/01/meme-meo.jpg" class="img-circle" alt="User Image" />
             </div>
             <div class="pull-left info">
               <p>Đỗ Võ Anh Trường</p>
@@ -88,14 +88,14 @@
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
             <li class="treeview">
-              <a href="Home.html">
+              <a href="/Home">
                 <i class=" fa fa-dashboard"></i>
                 <span>Home</span> <small class="label pull-right bg-green">new</small>
               
               </a>
             </li>
             <li>
-              <a href="Classify.html">
+              <a href="/Classify">
                 <i class="fa fa-th"></i> <span>Classify</span> <small class="label pull-right bg-green">new</small>
               </a>
             </li>
@@ -116,68 +116,7 @@
         <!-- /.sidebar -->
       </aside>
 
-      <div class="modal fade " id="myModal" role="dialog">
-        <div class="modal-dialog modal-xl">
-        
-          <!-- Modal content-->
-          <div class="box box-warning">
-            <div class="box-header">
-              <h3 class="box-title">Product information</h3>
-            </div><!-- /.box-header -->
-            <div class="box-body">
-              <form role="form">
-                <!-- text input -->
-                <div class="form-group">
-                  <label>Product Image</label>
-                  <input type="file" id="file" aria-label="File browser example">
-                </div>
-                <div class="form-group">
-                  <label>Product name</label>
-                  <input type="text" class="form-control" placeholder="Enter ..."/>
-                </div>
-                <div class="form-group">
-                  <label>Infomation</label>
-                  <input type="text" class="form-control" placeholder="Enter ..."/>
-                  <div class="form-group">
-                      <label>Amount</label>
-                      <input type="text" class="form-control" placeholder="Enter ..."/>
-                    </div>
-                    <div class="form-group">
-                      <label>Price</label>
-                      <input type="text" class="form-control" placeholder="Enter ..."/>
-                    </div>
-                    <div class="form-group">
-                      <label>Classify</label>
-                      <br/>
-                      <label class="form-check-label" for="radio1">
-                        <input type="radio" class="form-check-input" id="radio1"  value="option1" checked>Option 1</label>
-
-                      <label class="form-check-label" for="radio1">
-                        <input type="radio" class="form-check-input" id="radio1"  value="option1" checked>Option 1</label>
-
-                      <label class="form-check-label" for="radio1">
-                        <input type="radio" class="form-check-input" id="radio1" value="option1" checked>Option 1</label>
-
-                      <label class="form-check-label" for="radio1">
-                        <input type="radio" class="form-check-input" id="radio1"  value="option1" checked>Option 1</label>
-
-                      
-                    </div>
-
-                    <div class="form-group">
-                      <button type="button" class="btn btn-primary btn-block"><a href="#">Add Product</a></button>
-                      
-                    </div>
-
-                </div>
-              </form>
-            </div><!-- /.box-body -->
-          </div>
-
-          
-        </div>
-      </div>
-
+    
       <!-- Right side column. Contains the navbar and content of the page -->
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -195,7 +134,7 @@
         <Section class="content">
         <div class="row">
           <!-- left column -->
-          <div class="col-md-8">
+          <div class="col-md-9">
             <!-- general form elements -->
             <div class="box box-primary">
               <div class="box-header">
@@ -211,64 +150,28 @@
                         <th>Image</th>
                         <th>Name</th>
                         <th>Information</th>
-                        <th>Amount</th>
+                        <th>Count</th>
                         <th>Price</th>
                         <th>Classify</th>
-
+                        <th>Edit</th>
+                        
                       </tr>
                     </thead>
                     <tbody>
+                       {{#each Product}}
                       <tr>
-                        <td><img src="dist/img/meow.jpg"  width="80" height="80"class="img-thumbnail" alt="Cinque Terre"/></td>
-                        <td>Trident</td>
-                        <td>Internet
-                          Explorer 4.0</td>
-                        <td>Win 95+</td>
-                        <td>Win 95+</td>
-                        <td>Win 95+</td>
+                        <td><img src="{{this.image}}"  width="80" height="80"class="img-thumbnail" alt="Cinque Terre"/></td>
+                      <td>{{this.name}}</td>
+                      <td>{{this.info}}</td>
+                      <td>{{this.count}}</td>
+                      <td>{{this.price}}</td>
+                      <td>{{this.classify}}</td>
+                       {{!-- <td><a href="/Product/edit/{{this.Id}}"/>Edit</td>
+                        <td><a href="#"/>Delete</td> --}}
+                      <td><button type="button" class=" btn btn-warning" onclick="onEdit('{{this._id}}')">Edit</button>
+                      <button type="button" class=" btn btn-danger" onclick="myFunction('{{this._id}}')" >Delete</button></td>
                       </tr>
-                      <tr>
-                        <td><img src="dist/img/meow.jpg"  width="80" height="80"class="img-thumbnail" alt="Cinque Terre"/></td>
-                        <td>Trident</td>
-                        <td>Trident</td>
-                        <td>Internet
-                          Explorer 5.0</td>
-                        <td>Win 95+</td>
-                        <td>Win 95+</td>
-                      </tr>
-                      <tr>
-                        <td><img src="dist/img/meow.jpg"  width="80" height="80"class="img-thumbnail" alt="Cinque Terre"/></td>
-                        <td>Trident</td>
-                        <td>Trident</td>
-                        <td>Internet
-                          Explorer 5.5</td>
-                        <td>Win 95+</td>
-                        <td>Win 95+</td>
-                      </tr>
-                      <tr>
-                        <td><img src="dist/img/meow.jpg"  width="80" height="80"class="img-thumbnail" alt="Cinque Terre"/></td>
-                        <td>Trident</td>
-                        <td>Trident</td>
-                        <td>Internet
-                          Explorer 6</td>
-                        <td>Win 98+</td>
-                        <td>Win 95+</td>
-                      </tr>
-                      <tr>
-                        <td><img src="dist/img/meow.jpg"  width="80" height="80"class="img-thumbnail" alt="Cinque Terre"/></td>
-                        <td>Trident</td>
-                        <td>Trident</td>
-                        <td>Internet Explorer 7</td>
-                        <td>Win XP SP2+</td>
-                        <td>Win 95+</td>
-                      </tr>
-              
-                 <tfoot>
-                     <tr>
-                        <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal">Add product</button>
-                     </tr>
-                 </tfoot>
-                
+                        {{/each}}
                     </tbody>
 
                   </table>
@@ -277,62 +180,53 @@
             </div>
 
           </div><!--/.col (left) -->
+          <!-- Modal  -->
 
-          <div class="col-md-4">
-            <div class="box box-warning">
-              <div class="box-header">
-                <h3 class="box-title">Product information</h3>
-              </div><!-- /.box-header -->
-              <div class="box-body">
-                <form role="form">
-                  <div class="form-group">
-                    <label>Product Image</label>
-                    <input type="file" id="file" aria-label="File browser example">
-                  </div>
+          <div class="col-md-3">
+            <h2 class="bg-primary"> Add Product</h2>
+            
+                  <form role="form" action="/Product/insert" onsubmit = "return validateForm()" method="POST">
                   <!-- text input -->
                   <div class="form-group">
-                    <label>Product name</label>
-                    <input type="text" class="form-control" placeholder="Enter ..."/>
+                    
+                    <input id="name" name="name"  class="form-control" type="text" placeholder="Enter Name ..." class="form-control"/>
+                    <p id="aName" style="color: red; margin-left:15%;"></p>
+                    
                   </div>
                   <div class="form-group">
-                    <label>Amount</label>
-                    <input type="text" class="form-control" placeholder="Enter ..."/>
+                    
+                    <input id="info" name="info" type="text"  class="form-control" placeholder="Enter Information ..."/>
+                     <i id="aInfo" style="color: red; margin-left:15%;"></i>
+                    </div>
                     <div class="form-group">
-                        <label>Information</label>
-                        <input type="text" class="form-control" placeholder="Enter ..."/>
+                      
+                        <input id="count"  name="count" type="number"  class="form-control" placeholder="Enter Count ..."/>
+                         <i id="aCount"style="color: red; margin-left:15%;"></i>
                       </div>
                       <div class="form-group">
-                        <label>Price</label>
-                        <input type="text" class="form-control" placeholder="Enter ..."/>
+                      
+                        <input id="price" name="price" type="number"  class="form-control" placeholder="Enter Price ..."/>
+                         <i id="aPrice"style="color: red; margin-left:15%;"></i>
                       </div>
                       <div class="form-group">
                         <label>Classify</label>
-                        <br/>
-                        <label class="form-check-label" for="radio1">
-                          <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1" checked>Option 1</label>
-
-                        <label class="form-check-label" for="radio1">
-                          <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1" checked>Option 1</label>
-
-                        <label class="form-check-label" for="radio1">
-                          <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1" checked>Option 1</label>
-
-                        <label class="form-check-label" for="radio1">
-                          <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1" checked>Option 1</label>
-
-                        
+                        <select class="form-group" name="classify" >
+                        <option>Phone</option> 
+                        <option>Tablet</option> 
+                        <option>Laptop</option> 
+                        <option>Watch</option> 
+                        </select>
                       </div>
-
+                       <input id="img"  type='file' onchange="onchangeImg();readURL(this);" />
+                       <input type="hidden" id="image" name="image" >
+                         <img id="imgShow"  style="height: 120px; width: 120px;" alt="your image" />
+                      </div>
                       <div class="form-group">
-                        <button type="button" class="btn btn-primary btn-block"><a href="Home.html">Edit Classify</a></button>
-                        <button type="button" class="btn btn-default btn-block"><a href="Home.html">Delete Classify</a></button>
+                        <button id="btnAdd"  style="width: 25%;" class="form-control" type="submit" class="btn btn-primary">Add Product</button>
                       </div>
 
-                  </div>
                 </form>
-              </div><!-- /.box-body -->
-            </div><!-- /.box -->
-          </div><!--/.col (right) -->
+          </div>
         </div>   <!-- /.row -->
       </section>
       
@@ -344,6 +238,132 @@
         <div class="pull-right hidden-xs">
           <b>Version</b> 2.0
         </div>
-        <strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2014-2015 Almsaeed Studio</strong> All rights reserved.
       </footer>
+       <script>
+
+           var firebaseConfig = {
+    apiKey: "AIzaSyD69PslQBpJU1DZ9vehIGyCq0muJTqPUuU",
+    authDomain: "myserver-67396.firebaseapp.com",
+    projectId: "myserver-67396",
+    storageBucket: "myserver-67396.appspot.com",
+    messagingSenderId: "377148547701",
+    appId: "1:377148547701:web:e38a48f53489f1a4674e3c",
+    measurementId: "G-CZKSPGTEC7"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+const onchangeImg=()=>{
+var file=document.getElementById('img').files[0];
+
+var storageRef = firebase.storage().ref( uuid());
+        let uploadTask = storageRef.put(file);
+
+        uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+            (snapshot) =>{},
+            (error) =>{console.log(error) },
+            () =>{
+                uploadTask.snapshot.ref.getDownloadURL().then((url) =>{  
+                    console.log(url)  
+                    document.getElementById('image').value=url      
+                })
+            }
+        ) 
+}
+const uuid =  () => {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+        });
+    }
+
+
+
+  
+function myFunction(Id) {
+  
+  if (confirm("Press a button!")) {
+    onDelete(Id);
+  }
+}
+
+function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#imgShow')
+                        .attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+ function validateForm()  {
+             var n = document.getElementById("name").value;
+             var i = document.getElementById("info").value;
+              var c = document.getElementById("count").value;
+              var numC = Number(c);
+               var p = document.getElementById("price").value;
+               var numP = Number(p);
+
+               var aN=document.getElementById("aName");
+               var aI=document.getElementById("aInfo");
+               var aC=document.getElementById("aCount");
+               var aP=document.getElementById("aPrice");
+ 
+             if(n== "" || n.trim().length >20) {
+                aN.innerHTML="Please enter Product Name"
+                 return false;
+                 
+             }else{aN.innerHTML=""}
+             if(i == "" || n.trim().length >50) {
+                  aI.innerHTML="Please enter Product Information"
+                 return false;
+             }else{aI.innerHTML=""}
+                if(numC <1 || numC > 50) {
+                  aC.innerHTML="Please enter Product Count"
+                 return false;
+             }else{aC.innerHTML=""}
+                if(numP <50 || numP > 2000) {
+                  aP.innerHTML="Please enter Product Price"
+                 return false;
+             }else{aP.innerHTML=""}
+
+             return true;
+         }
+
+
+
+
+
+      const onDelete=async(id)=>{
+  const url='http://localhost:3000/Product/delete/'+id
+  const option={
+    method:'delete',
+    headers: {
+      'Content-Type':'application/json'
+    }
+  }
+  try{
+    await fetchAPI(url,option)
+    console.log('da load')
+ window.location.href='/Product'
+  }catch(e){
+console.log('Delete error: ',e)
+  }
+}
+
+      const fetchAPI =async(url,option)=>{
+        const res = await fetch(url,option)
+        return res.json()
+      }
+
+
+  const onEdit = id =>{
+    window.location.href='/Product/edit/'+id
+     }
+    </script>
     

@@ -1,0 +1,111 @@
+<div class="col-md-3"></div>
+<div class="col-md-6">
+            <!-- general form elements disabled -->
+            <div class="box box-warning">
+              <div class="box-header">
+                <h3 class="box-title">Product type information</h3>
+              </div><!-- /.box-header -->
+              <div class="box-body">
+                <form role="form" onsubmit = "return validateFormEditProduct()" action="/Product/update/{{Product._id}}" method="POST">
+                  <!-- text input -->
+                  <div class="form-group">
+                    <label>Product name</label>
+                    <input id="name" name="name" value="{{Product.name}}" type="text" class="form-control"/>
+                  <i id="aEditName" style="color: red; margin-left:15%;"></i>
+                  </div>
+                  <div class="form-group">
+                    <label>Information</label>
+                    <input  id="info" name="info" type="text" value="{{Product.info}}" class="form-control" placeholder="Enter ..."/>
+                     <i id="aEditInfo" style="color: red; margin-left:15%;"></i>
+                    </div>
+                    <div class="form-group">
+                        <label>Count</label>
+                        <input  id="count" name="count" type="number" value="{{Product.count}}" class="form-control" placeholder="Enter ..."/>
+                      <i id="aEditCount" style="color: red; margin-left:15%;"></i>
+                      </div>
+                      <div class="form-group">
+                        <label>Price</label>
+                        <input  id="price" name="price" type="number" value="{{Product.price}}" class="form-control" placeholder="Enter ..."/>
+                      <i id="aEditPrice" style="color: red; margin-left:15%;"></i>
+                      </div>
+                      <div class="form-group">
+                        <label>Classify</label>
+                        <select id="classify" class="form-group" name="classify" >
+                          {{!-- {{#each Classify}} --}}
+                          {{!-- {{#if(soSanh this.Id ../Product.ClassifyId)}} --}}
+                          {{!-- <option  >{{this.name}}</option> --}}
+                          {{!-- {{else}} --}}
+                          {{!-- <option value="{{this.Id}}">{{this.Name}}</option>
+                          {{/if}} --}}
+                          {{!-- {{/each}} --}}
+                          <option>Phone</option>
+                           <option>Tablet</option>
+                            <option>PC</option>
+                             <option>TV</option>
+                              <option>Assectori</option>
+                        
+                        </select>
+                        <i id="aEditClassify" style="color: red; margin-left:15%;"></i>
+                      </div>
+                       <div class="form-group">
+                         <input type="file" value="{{Product.image}}" id="img" onchange="readURL(this);" />
+                         <img id="imgShow" src="{{Product.image}}"  width="120" height="120"class="img-thumbnail" alt="Cinque Terre"/>
+                      </div>
+                      <div class="form-group">
+                        <button  class="form-control" type="submit" class="btn btn-primary btn-block">Edit Product</a></button>
+                      </div>
+
+                </form>
+              </div><!-- /.box-body -->
+            </div><!-- /.box -->
+          </div>
+          <div class="col-md-3"></div>
+          <script>
+function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#imgShow')
+                        .attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+function validateFormEditProduct()  {
+             var n = document.getElementById("name").value;
+             var i = document.getElementById("info").value;
+              var c = document.getElementById("count").value;
+              var numC = Number(c);
+               var p = document.getElementById("price").value;
+               var numP = Number(p);
+
+               var aN=document.getElementById("aEditName");
+               var aI=document.getElementById("aEditInfo");
+               var aC=document.getElementById("aEditCount");
+               var aP=document.getElementById("aEditPrice");
+ 
+             if(n== "" || n.trim().length >20) {
+                aN.innerHTML="Please enter Product Name"
+                 return false;
+                 
+             }else{aN.innerHTML=""}
+             if(i == "" || n.trim().length >50) {
+                  aI.innerHTML="Please enter Product Information"
+                 return false;
+             }else{aI.innerHTML=""}
+                if(numC <1 || numC > 50) {
+                  aC.innerHTML="Please enter Product Count"
+                 return false;
+             }else{aC.innerHTML=""}
+                if(numP <50 || numP > 2000) {
+                  aP.innerHTML="Please enter Product Price"
+                 return false;
+             }else{aP.innerHTML=""}
+
+             return true;
+         }
+
+          </script>

@@ -7,18 +7,17 @@ var jwt=require('jsonwebtoken');
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
-router.post("/", function(req, res, next) {
+router.post("/",async function(req, res, next) {
   const {username,password}=req.body;
-  const check =UserController.login(username,password)
+  const check =await UserController.login(username,password)
   if(check){
     const access_token=jwt.sign({id:1,name:'DVAT'},process.env.JWT_SECRET_KEY)
     req.session.access_token=access_token
-    res.redirect("/Classify")
+    res.redirect("/Home")
   }
 else{
   res.redirect('/')
 }
-  
 });
 router.get('/logout', function(req, res, next) {
   res.redirect('/')

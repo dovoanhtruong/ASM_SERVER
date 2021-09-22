@@ -1,8 +1,21 @@
 const ClassifyServer=require('../Servers/Classify')
 
-exports.get=function getAllClassiify(){
-return ClassifyServer.get();
+exports.get=async () =>{
+return await ClassifyServer.get();
 }
-exports.getOne=function(id){
-    return ClassifyServer.getOne(id);
+exports.getOne=async (id)=>{
+    return await ClassifyServer.getOne(id);
     }
+
+exports.delete=async (id)=>{
+    await ClassifyServer.delete(id);
+}
+exports.update=(params,body)=>{
+    let{id}=params
+    let{name,count,product,date}=body
+    ClassifyServer.update({id,name,count,product,date})
+}
+exports.insert=async(body)=>{
+    let{name,count,product,date}=body
+    await ClassifyServer.insert({name,count,product,date})
+}

@@ -38,13 +38,13 @@
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="dist/img/meow.jpg" class="user-image" alt="User Image"/>
+                  <img src="https://sendidau.com/wp-content/uploads/2021/01/meme-meo.jpg" class="user-image" alt="User Image"/>
                   <span class="hidden-xs">Đỗ Võ Anh Trường</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
-                    <img src="dist/img/meow.jpg" class="img-circle" alt="User Image" />
+                    <img src="https://sendidau.com/wp-content/uploads/2021/01/meme-meo.jpg" class="img-circle" alt="User Image" />
                     <p>
                      Đỗ Võ Anh Trường - Ad Mobile Shop
                       <small>Member since Nov. 2021</small>
@@ -74,7 +74,7 @@
           <!-- Sidebar user panel -->
           <div class="user-panel">
             <div class="pull-left image">
-              <img src="dist/img/meow.jpg" class="img-circle" alt="User Image" />
+              <img src="https://sendidau.com/wp-content/uploads/2021/01/meme-meo.jpg" class="img-circle" alt="User Image" />
             </div>
             <div class="pull-left info">
               <p>Đỗ Võ Anh Trường</p>
@@ -88,7 +88,7 @@
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
             <li class="treeview">
-              <a href="Home.html">
+              <a href="/Home">
                 <i class=" fa fa-dashboard"></i>
                
                 <span>Home</span> <small class="label pull-right bg-green">new</small>
@@ -96,12 +96,12 @@
               </a>
             </li>
             <li class="active treeview">
-                <a href="Classify.html">
+                <a href="#">
                   <i class="fa fa-dashboard"></i> <span>Classify</span> <small class="label pull-right bg-green">new</small>
                 </a>
               </li>
             <li>
-              <a href="Product.html">
+              <a href="/Product">
                 <i class="fa fa-th"></i> <span>Product</span> <small class="label pull-right bg-green">new</small>
               </a>
             </li>
@@ -115,41 +115,7 @@
         
         </section>
 
-        <div class="modal fade " id="myModal" role="dialog">
-          <div class="modal-dialog modal-xl">
-          
-            <!-- Modal content-->
-            <div class="box box-warning">
-              <div class="box-header">
-                <h3 class="box-title">Product type information</h3>
-              </div><!-- /.box-header -->
-              <div class="box-body">
-                <form role="form">
-                  <!-- text input -->
-                  <div class="form-group">
-                    <label>Classify name</label>
-                    <input type="text" class="form-control" placeholder="Enter ..."/>
-                  </div>
-                  <div class="form-group">
-                    <label>Amount</label>
-                    <input type="text" class="form-control" placeholder="Enter ..."/>
-                    <div class="form-group">
-                        <label>Product Name</label>
-                        <input type="text" class="form-control" placeholder="Enter ..."/>
-                      </div>
-                      <div class="form-group">
-                        <button type="button" class="btn btn-primary btn-block"><a href="#">Add Classify</a></button>
-                        
-                      </div>
-
-                  </div>
-                </form>
-              </div><!-- /.box-body -->
-            </div>
-
-            
-          </div>
-        </div>
+      
         <!-- /.sidebar -->
       </aside>
 
@@ -170,7 +136,7 @@
         <Section class="content">
         <div class="row">
           <!-- left column -->
-          <div class="col-md-8">
+          <div class="col-md-9">
             <!-- general form elements -->
             <div class="box box-primary">
               <div class="box-header">
@@ -184,27 +150,28 @@
                     <thead>
                       <tr>
                         <th>Classify name</th>
-                        <th>Amount Product</th>
-                        <th>Name Product</th>
+                        <th>Count</th>
+                        <th>Product</th>
+                        <th>Date</th>
                         <th>Edit</th>
+                     
                       </tr>
                     </thead>
                     <tbody>
                       {{#each Classify}}
                       <tr>
-                        <td>{{this.Name}}</td>
-                        <td>{{this.Count}}</td>
-                        <td>  {{this.NameProduct}}</td>
-                        <td><a href="/Classify/edit/{{this.Id}}"/>Edit</td>
+                        <td>{{this.name}}</td>
+                        <td>{{this.count}}</td>
+                        <td>  {{this.product}}</td>
+                         <td>  {{formatDate this.date}}</td>
+                      {{!-- <td><a href="/Classify/edit/{{this.Id}}"/>Edit</td> --}}
+                        {{!-- <td><a href="/Classify/edit/{{this.Id}}"/>Edit</td> --}}
+                        <td><button type="button" class=" btn btn-warning" onclick="onEdit('{{this._id}}')">Edit</button>
+                      <button type="button" class="btn btn-danger" onclick="onDelete('{{this._id}}')" >Delete</button></td>
+
                         {{!-- <td><a href="/classify/edit/{{this.id}}">Edit</a></td> --}}
                       </tr>
                     {{/each}}
-                 <tfoot>
-                     <tr>
-                        <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal">Add product</a></button>
-                     </tr>
-                 </tfoot>
-                
                     </tbody>
 
                   </table>
@@ -213,37 +180,39 @@
             </div>
 
           </div><!--/.col (left) -->
-          <!-- right column -->
-          <div class="col-md-4">
-            <!-- general form elements disabled -->
-            <div class="box box-warning">
-              <div class="box-header">
-                <h3 class="box-title">Product type information</h3>
-              </div><!-- /.box-header -->
-              <div class="box-body">
-                <form role="form">
+           <div class="col-md-3">
+               <h2 class="bg-primary">Add Product</h2>
+                <form role="form" action="/Classify/insert" onsubmit = "return validateForm()" method="POST">
                   <!-- text input -->
                   <div class="form-group">
-                    <label>Classify name</label>
-                    <input type="text" class="form-control" placeholder="Enter ..."/>
+                    
+                    <input id="name" name="name"  class="form-control" type="text" placeholder="Enter Name ..."/>
+                    <p id="aName" style="color: red; margin-left:15%;"></p>
+                    
                   </div>
                   <div class="form-group">
-                    <label>Amount</label>
-                    <input type="text" class="form-control" placeholder="Enter ..."/>
+                    
+                    <input id="count" name="count" type="number"  class="form-control" placeholder="Enter Count ..."/>
+                     <i id="aCount" style="color: red; margin-left:15%;"></i>
+                    </div>
                     <div class="form-group">
-                        <label>Product Name</label>
-                        <input type="text" class="form-control" placeholder="Enter ..."/>
+                      
+                        <input id="product"  name="product" type="text"  class="form-control" placeholder="Enter ProductName ..."/>
+                         <i id="aProduct"style="color: red; margin-left:15%;"></i>
                       </div>
                       <div class="form-group">
-                        <button type="button" class="btn btn-primary btn-block"><a href="Home.html">Edit Classify</a></button>
-                        <button type="button" class="btn btn-default btn-block"><a href="Home.html">Delete Classify</a></button>
+                      
+                        <input id="date" name="date" type="date"  class="form-control" placeholder="Enter Date ..."/>
+                         <i id="aDate"style="color: red; margin-left:15%;"></i>
+                      </div>
+                      <div class="form-group">
+                        <button id="btnAdd"  class="form-control" type="submit" class="btn btn-primary">Add Classify</button>
                       </div>
 
-                  </div>
                 </form>
-              </div><!-- /.box-body -->
-            </div><!-- /.box -->
-          </div><!--/.col (right) -->
+           </div>
+          <!-- right column -->
+         <!--/.col (right) -->
         </div>   <!-- /.row -->
       </section>
       
@@ -260,8 +229,71 @@
         <div class="pull-right hidden-xs">
           <b>Version</b> 2.0
         </div>
-        <strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2014-2015 Almsaeed Studio.</strong> All rights reserved.
       </footer>
     </div><!-- ./wrapper -->
+    <script>
+ function validateForm()  {
+             var n = document.getElementById("name").value;
+             var c = document.getElementById("count").value;
+              var numC = Number(c);
+              var p = document.getElementById("product").value;
+              var d=document.getElementById('date').value;
+              var date=new Date(d)
+                var today = new Date()
+                today.setHours(0,0,0,0,)
+
+               var aN=document.getElementById("aName");
+               var aC=document.getElementById("aCount");
+               var aP=document.getElementById("aProduct");
+               var aD=document.getElementById("aDate");
+ 
+             if(n== "" || n.trim().length >20) {
+                aN.innerHTML="Please enter Classify Name"
+                 return false;
+                 
+             }else{aN.innerHTML=""}
+             if(numC <1 || numC > 50) {
+                  aC.innerHTML="Please enter Classify Count"
+                 return false;
+             }else{aC.innerHTML=""}
+                if(p== "" || p.trim().length >50) {
+                  aP.innerHTML="Please enter Product Name"
+                 return false;
+             }else{aP.innerHTML=""}
+             if(!d || date > today){
+                aD.innerHTML="Please enter Classify Date"
+                return false;
+             }else{aD.innerHTML=""}
+             return true;
+         }
+
+      const onDelete=async(id)=>{
+  const url='http://localhost:3000/Classify/delete/'+id
+  const option={
+    method:'delete',
+    headers: {
+      'Content-Type':'application/json'
+    }
+  }
+  try{
+    await fetchAPI(url,option)
+    console.log('da load')
+    window.location.href='/Classify'
+  }catch(e){
+console.log('Delete error: ',e)
+  }
+}
+
+      const fetchAPI =async(url,option)=>{
+        const res = await fetch(url,option)
+        return res.json()
+      }
+
+
+  const onEdit = id =>{
+    window.location.href='/Classify/edit/'+id
+     }
+    </script>
 
     
